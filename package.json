@@ -1,6 +1,6 @@
 {
   "name": "leaf-dust",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "description": "leaf dustjs middleware",
   "main": "index.js",
   "scripts": {
@@ -22,6 +22,7 @@
     "dustjs-linkedin": "^2.7.4",
     "extend": "^3.0.0",
     "glob": "^7.1.1",
+    "lodash": "^4.16.5",
     "mkdirp": "^0.5.1",
     "moment": "^2.15.2"
   }

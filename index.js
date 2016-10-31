@@ -31,22 +31,23 @@ class middleware {
     let koa = this.koa;
     let dust;
     if (options.precompile) {
+      let tmpViewDir = pathModule.resolve(this.basepath, tmpDir);
       dust = new codust({
-        base: pathModule.resolve(leaf.basepath, tmpDir),
+        base: tmpViewDir,
         precompiled: options.precompile
       });
       dust._dust.config.cjs = true;
       yield new Promise((resolve, reject) => {
-        mkdirp.sync(tmpDir);
-        glob(viewDir + "/**/*.dust", (err, files) => {
+        mkdirp.sync(tmpViewDir);
+        glob(pathModule.resolve(this.basepath, viewDir) + "/**/*.dust", (err, files) => {
           if (err) {
             reject(err);
           }
           files.map((file) => {
-            return [fs.readFileSync(file).toString(), file.substr([viewDir, "/"].join('').length)];
+            return [fs.readFileSync(file).toString(), file.substr([pathModule.resolve(this.basepath, viewDir), "/"].join('').length)];
           }).map((data) => {
-            mkdirp.sync(pathModule.join(tmpDir, pathModule.dirname(data[1])));
-            return fs.writeFileSync(pathModule.join(tmpDir, data[1]), dust._dust.compile(data[0], data[1]));
+            mkdirp.sync(pathModule.join(tmpViewDir, pathModule.dirname(data[1])));
+            return fs.writeFileSync(pathModule.join(tmpViewDir, data[1]), dust._dust.compile(data[0], data[1]));
           });
           resolve();
         });
