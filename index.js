@@ -26,7 +26,7 @@ class middleware {
   }
 
   * initialize(next) {
-    debug("using leaf dust template middleware");
+    logger("using leaf dust template middleware");
 
     let koa = this.koa;
     let dust;
