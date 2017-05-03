@@ -10,8 +10,8 @@ const logger = require("debug")("leaf:mw:dust"),
   extend = require("extend"),
   pathModule = require("path");
 
-const tmpDir = "./.tmp/View",
-  viewDir = "app/View";
+const tmpDir = "./.tmp/views",
+  viewDir = "resources/views";
 
 const DEFAULTS = {
   precompile: false,
